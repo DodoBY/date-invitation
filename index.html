@@ -8,9 +8,9 @@
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(-45deg,#ff9ecf,#ffcce6,#ff80bf,#ffb3d9);
+background:linear-gradient(-45deg,#ff9ecf,#ffcce6,#ff80bf,#ff66b3);
 background-size:400% 400%;
-animation:gradient 12s ease infinite;
+animation:gradient 15s ease infinite;
 font-family:'Segoe UI',sans-serif;
 display:flex;
 justify-content:center;
@@ -27,14 +27,33 @@ transition:1s;
 100%{background-position:0% 50%;}
 }
 
+.fade-in{
+animation:fadeIn 2s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:scale(0.95);}
+to{opacity:1; transform:scale(1);}
+}
+
 .container{
-animation:fadeIn 1.5s ease;
+backdrop-filter: blur(6px);
+background: rgba(255,255,255,0.1);
+padding:40px;
+border-radius:25px;
+box-shadow:0 20px 40px rgba(0,0,0,0.2);
 }
 
 h1{
-font-size:30px;
-margin-bottom:25px;
-animation:float 3s ease-in-out infinite;
+font-size:28px;
+margin-bottom:20px;
+line-height:1.5;
+}
+
+#countdown{
+margin:15px 0;
+font-size:18px;
+opacity:0.9;
 }
 
 button{
@@ -43,14 +62,14 @@ font-size:18px;
 border:none;
 border-radius:30px;
 cursor:pointer;
-margin:15px;
+margin:10px;
 transition:0.3s;
 }
 
 #yes{
 background:#ff4da6;
 color:white;
-box-shadow:0 5px 15px rgba(0,0,0,0.3);
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
 #yes:hover{
@@ -63,20 +82,30 @@ color:#ff4da6;
 position:absolute;
 }
 
-#countdown{
-margin-top:15px;
-font-size:18px;
+.final{
+font-size:30px;
+white-space:pre-line;
+animation:glow 2s ease-in-out infinite alternate;
 }
 
-@keyframes float{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-8px);}
-100%{transform:translateY(0px);}
+@keyframes glow{
+from{text-shadow:0 0 10px #fff;}
+to{text-shadow:0 0 30px #ff4da6;}
 }
 
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
+.signature{
+margin-top:20px;
+font-size:22px;
+font-style:italic;
+opacity:0.8;
+}
+
+.restart{
+margin-top:30px;
+font-size:14px;
+opacity:0.7;
+cursor:pointer;
+text-decoration:underline;
 }
 
 .heart{
@@ -88,26 +117,17 @@ animation:fall linear infinite;
 0%{transform:translateY(-10vh);}
 100%{transform:translateY(110vh);}
 }
-
-.final{
-font-size:30px;
-white-space:pre-line;
-animation:glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px #fff;}
-to{text-shadow:0 0 25px #ff4da6;}
-}
 </style>
 </head>
 
-<body>
+<body class="fade-in">
 
 <div class="container">
 <h1>
-Xin chào Phương! 💕<br>
-Anh muốn mời em đi hẹn hò cùng anh vào ngày 22 tháng 2 lúc 14:00
+Xin chào Phương 💕<br>
+Anh đã chờ khoảnh khắc này đó...<br><br>
+Anh muốn mời em đi hẹn hò cùng anh<br>
+vào ngày 22 tháng 2 lúc 14:00
 </h1>
 
 <div id="countdown"></div>
@@ -118,7 +138,7 @@ Anh muốn mời em đi hẹn hò cùng anh vào ngày 22 tháng 2 lúc 14:00
 
 <script>
 
-// таймер
+// Таймер
 const countdownEl=document.getElementById("countdown");
 const targetDate=new Date("Feb 22, 2026 14:00:00").getTime();
 
@@ -136,7 +156,7 @@ countdownEl.innerHTML=
 },1000);
 
 
-// убегающая кнопка
+// Убегающая кнопка
 let noBtn=document.getElementById("no");
 let counter=0;
 
@@ -153,15 +173,17 @@ noBtn.style.display="none";
 });
 
 
-// финал
+// Финал
 document.getElementById("yes").addEventListener("click",function(){
 
 document.body.style.background="#ff4da6";
 
 document.body.innerHTML=
-'<div class="final" id="finalText"></div>';
+'<div class="final" id="finalText"></div>'+
+'<div class="signature">uncle D 💌</div>'+
+'<div class="restart" onclick="location.reload()">Xem lại từ đầu</div>';
 
-let text="Anh biết mà ~ 😌\nEm đã chọn đúng rồi đó 💕\n\nHẹn gặp em sớm nhé.\n\nWith love,\nuncle D 💌";
+let text="Anh biết mà ~ 😌\nEm đã chọn đúng rồi đó 💕\n\nHẹn gặp em sớm nhé.";
 
 let i=0;
 let speed=50;
@@ -175,7 +197,7 @@ setTimeout(typeWriter,speed);
 }
 typeWriter();
 
-createHearts(80);
+createHearts(90);
 });
 
 function createHearts(amount){

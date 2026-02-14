@@ -16,6 +16,7 @@ align-items:center;
 text-align:center;
 overflow:hidden;
 color:white;
+transition:0.5s;
 }
 
 .container{
@@ -24,7 +25,7 @@ animation:fadeIn 1.5s ease;
 
 h1{
 font-size:30px;
-margin-bottom:30px;
+margin-bottom:25px;
 animation:float 3s ease-in-out infinite;
 }
 
@@ -55,7 +56,7 @@ position:absolute;
 }
 
 #countdown{
-margin-top:20px;
+margin-top:15px;
 font-size:18px;
 }
 
@@ -83,7 +84,6 @@ animation:fall linear infinite;
 .typewriter{
 font-size:28px;
 white-space:pre-line;
-animation:fadeIn 1s ease;
 }
 </style>
 </head>
@@ -102,20 +102,13 @@ Anh muốn mời em đi hẹn hò cùng anh vào ngày 22 tháng 2 lúc 14:00
 <button id="no">Không, em bận rồi 🙈</button>
 </div>
 
-<!-- Музыка -->
 <audio id="music" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6e7e8b4f65.mp3?filename=romantic-background-112191.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/download/audio/2023/03/21/audio_38e8d0fdf3.mp3?filename=romantic-soft-piano-143610.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-// запуск музыки после первого клика (браузеры требуют действие пользователя)
-document.body.addEventListener("click",function(){
-document.getElementById("music").play();
-},{once:true});
-
-
-// таймер
+// ТАЙМЕР
 const countdownEl=document.getElementById("countdown");
 const targetDate=new Date("Feb 22, 2026 14:00:00").getTime();
 
@@ -133,7 +126,7 @@ countdownEl.innerHTML=
 },1000);
 
 
-// убегающая кнопка
+// УБЕГАЮЩАЯ КНОПКА
 let noBtn=document.getElementById("no");
 let counter=0;
 
@@ -150,8 +143,11 @@ noBtn.style.display="none";
 });
 
 
-// эффект при нажатии
+// ФИНАЛ
 document.getElementById("yes").addEventListener("click",function(){
+
+document.getElementById("music").play();
+
 document.body.innerHTML=
 '<div class="typewriter" id="finalText"></div>';
 
@@ -169,7 +165,7 @@ setTimeout(typeWriter,speed);
 }
 typeWriter();
 
-createHearts(60);
+createHearts(70);
 });
 
 function createHearts(amount){

@@ -2,143 +2,103 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>For Phương 💕</title>
+<title>For Phương</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(-45deg,#ff9ecf,#ffcce6,#ff80bf,#ff66b3);
-background-size:400% 400%;
-animation:gradient 15s ease infinite;
-font-family:'Segoe UI',sans-serif;
+background:#fff5f8;
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
-overflow:hidden;
-color:white;
-transition:1s;
-}
-
-@keyframes gradient{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-.fade-in{
-animation:fadeIn 2s ease;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:scale(0.95);}
-to{opacity:1; transform:scale(1);}
+font-family:'Quicksand',sans-serif;
+color:#5c3a4b;
 }
 
 .container{
-backdrop-filter: blur(6px);
-background: rgba(255,255,255,0.1);
+max-width:500px;
 padding:40px;
-border-radius:25px;
-box-shadow:0 20px 40px rgba(0,0,0,0.2);
 }
 
 h1{
-font-size:28px;
+font-family:'Playfair Display',serif;
+font-size:32px;
+font-weight:600;
+line-height:1.4;
 margin-bottom:20px;
-line-height:1.5;
+}
+
+.subtitle{
+font-size:16px;
+opacity:0.7;
+margin-bottom:30px;
 }
 
 #countdown{
-margin:15px 0;
-font-size:18px;
-opacity:0.9;
-}
-
-button{
-padding:15px 35px;
-font-size:18px;
-border:none;
-border-radius:30px;
-cursor:pointer;
-margin:10px;
-transition:0.3s;
-}
-
-#yes{
-background:#ff4da6;
-color:white;
-box-shadow:0 5px 20px rgba(0,0,0,0.3);
-}
-
-#yes:hover{
-transform:scale(1.1);
-}
-
-#no{
-background:white;
-color:#ff4da6;
-position:absolute;
-}
-
-.final{
-font-size:30px;
-white-space:pre-line;
-animation:glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px #fff;}
-to{text-shadow:0 0 30px #ff4da6;}
-}
-
-.signature{
-margin-top:20px;
-font-size:22px;
-font-style:italic;
+margin-bottom:30px;
+font-size:15px;
 opacity:0.8;
 }
 
-.restart{
-margin-top:30px;
-font-size:14px;
-opacity:0.7;
+button{
+padding:12px 28px;
+font-size:15px;
+border-radius:30px;
+border:1px solid #e8b4c7;
+background:white;
 cursor:pointer;
-text-decoration:underline;
+margin:8px;
+transition:0.25s ease;
+font-family:'Quicksand',sans-serif;
 }
 
-.heart{
-position:absolute;
-animation:fall linear infinite;
+#yes{
+background:#e8b4c7;
+color:white;
+border:none;
 }
 
-@keyframes fall{
-0%{transform:translateY(-10vh);}
-100%{transform:translateY(110vh);}
+#yes:hover{
+background:#d99ab3;
+}
+
+#no{
+position:relative;
+}
+
+.final{
+font-family:'Playfair Display',serif;
+font-size:28px;
+line-height:1.5;
 }
 </style>
 </head>
 
-<body class="fade-in">
+<body>
 
 <div class="container">
 <h1>
-Xin chào Phương 💕<br>
-Anh đã chờ khoảnh khắc này đó...<br><br>
-Anh muốn mời em đi hẹn hò cùng anh<br>
-vào ngày 22 tháng 2 lúc 14:00
+Xin chào Phương,<br>
+Anh muốn mời em đi hẹn hò vào ngày 22 tháng 2 lúc 14:00.
 </h1>
+
+<div class="subtitle">
+Anh hy vọng em sẽ nói "có".
+</div>
 
 <div id="countdown"></div>
 
-<button id="yes">Có, em đi 💖</button>
-<button id="no">Không, em bận rồi 🙈</button>
+<button id="yes">Có, em đi</button>
+<button id="no">Không, em bận rồi</button>
 </div>
 
 <script>
 
-// Таймер
+// таймер
 const countdownEl=document.getElementById("countdown");
 const targetDate=new Date("Feb 22, 2026 14:00:00").getTime();
 
@@ -152,66 +112,37 @@ let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
 let seconds=Math.floor((distance%(1000*60))/1000);
 
 countdownEl.innerHTML=
-"⏳ Còn lại: "+days+" ngày "+hours+" giờ "+minutes+" phút "+seconds+" giây";
+days+" ngày "+hours+" giờ "+minutes+" phút "+seconds+" giây";
 },1000);
 
 
-// Убегающая кнопка
+// убегающая кнопка (аккуратно)
 let noBtn=document.getElementById("no");
 let counter=0;
 
-noBtn.addEventListener("mouseover",function(){
+noBtn.addEventListener("mouseenter",function(){
 counter++;
-let x=Math.random()*(window.innerWidth-150);
-let y=Math.random()*(window.innerHeight-50);
-noBtn.style.left=x+"px";
-noBtn.style.top=y+"px";
 
-if(counter>6){
-noBtn.style.display="none";
+let offsetX=(Math.random()*200)-100;
+let offsetY=(Math.random()*100)-50;
+
+noBtn.style.transform="translate("+offsetX+"px,"+offsetY+"px)";
+
+if(counter>5){
+noBtn.style.opacity="0";
 }
 });
 
 
-// Финал
+// финал
 document.getElementById("yes").addEventListener("click",function(){
-
-document.body.style.background="#ff4da6";
-
 document.body.innerHTML=
-'<div class="final" id="finalText"></div>'+
-'<div class="signature">uncle D 💌</div>'+
-'<div class="restart" onclick="location.reload()">Xem lại từ đầu</div>';
-
-let text="Anh biết mà ~ 😌\nEm đã chọn đúng rồi đó 💕\n\nHẹn gặp em sớm nhé.";
-
-let i=0;
-let speed=50;
-
-function typeWriter(){
-if(i<text.length){
-document.getElementById("finalText").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typeWriter,speed);
-}
-}
-typeWriter();
-
-createHearts(90);
+'<div class="final">'+
+'Anh biết mà.<br><br>'+
+'Hẹn gặp em vào 14:00 nhé.<br><br>'+
+'<span style="font-size:18px; opacity:0.6;">uncle D</span>'+
+'</div>';
 });
-
-function createHearts(amount){
-for(let i=0;i<amount;i++){
-let heart=document.createElement("div");
-heart.innerHTML="💗";
-heart.classList.add("heart");
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*3+2)+"s";
-heart.style.fontSize=(Math.random()*25+15)+"px";
-document.body.appendChild(heart);
-}
-}
-
 </script>
 
 </body>

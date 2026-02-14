@@ -1,71 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Приглашение 💕</title>
+<title>For Phương 💕</title>
+
 <style>
-body {
-    background: linear-gradient(135deg, #ff9ecf, #ffcce6);
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding-top: 100px;
-    overflow: hidden;
+body{
+margin:0;
+height:100vh;
+background:linear-gradient(135deg,#ff9ecf,#ffcce6);
+font-family:'Segoe UI',sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+color:white;
 }
 
-h1 {
-    color: white;
-    font-size: 40px;
+.container{
+animation:fadeIn 1.5s ease;
 }
 
-button {
-    padding: 15px 30px;
-    font-size: 20px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    margin: 20px;
-    transition: 0.3s;
+h1{
+font-size:30px;
+margin-bottom:30px;
+animation:float 3s ease-in-out infinite;
 }
 
-#yes {
-    background-color: #ff4da6;
-    color: white;
+button{
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:15px;
+transition:0.3s;
 }
 
-#no {
-    background-color: white;
-    color: #ff4da6;
-    position: absolute;
+#yes{
+background:#ff4da6;
+color:white;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+#yes:hover{
+transform:scale(1.1);
+}
+
+#no{
+background:white;
+color:#ff4da6;
+position:absolute;
+}
+
+#countdown{
+margin-top:20px;
+font-size:18px;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0px);}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.heart{
+position:absolute;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(110vh);}
+}
+
+.typewriter{
+font-size:28px;
+white-space:pre-line;
+animation:fadeIn 1s ease;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Пойдешь со мной на свидание? 💕</h1>
+<div class="container">
+<h1>
+Xin chào Phương! 💕<br>
+Anh muốn mời em đi hẹn hò cùng anh vào ngày 22 tháng 2 lúc 14:00
+</h1>
 
-<button id="yes">Да, пойду 😍</button>
-<button id="no">Нет 🙈</button>
+<div id="countdown"></div>
+
+<button id="yes">Có, em đi 💖</button>
+<button id="no">Không, em bận rồi 🙈</button>
+</div>
+
+<!-- Музыка -->
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_6e7e8b4f65.mp3?filename=romantic-background-112191.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-let noBtn = document.getElementById("no");
-let counter = 0;
 
-noBtn.addEventListener("mouseover", function() {
-    counter++;
-    let x = Math.random() * window.innerWidth;
-    let y = Math.random() * window.innerHeight;
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+// запуск музыки после первого клика (браузеры требуют действие пользователя)
+document.body.addEventListener("click",function(){
+document.getElementById("music").play();
+},{once:true});
 
-    if(counter > 5) {
-        noBtn.style.display = "none";
-    }
+
+// таймер
+const countdownEl=document.getElementById("countdown");
+const targetDate=new Date("Feb 22, 2026 14:00:00").getTime();
+
+setInterval(()=>{
+let now=new Date().getTime();
+let distance=targetDate-now;
+
+let days=Math.floor(distance/(1000*60*60*24));
+let hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+let minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+let seconds=Math.floor((distance%(1000*60))/1000);
+
+countdownEl.innerHTML=
+"⏳ Còn lại: "+days+" ngày "+hours+" giờ "+minutes+" phút "+seconds+" giây";
+},1000);
+
+
+// убегающая кнопка
+let noBtn=document.getElementById("no");
+let counter=0;
+
+noBtn.addEventListener("mouseover",function(){
+counter++;
+let x=Math.random()*(window.innerWidth-150);
+let y=Math.random()*(window.innerHeight-50);
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+
+if(counter>6){
+noBtn.style.display="none";
+}
 });
 
-document.getElementById("yes").addEventListener("click", function() {
-    document.body.innerHTML = "<h1 style='color:white;'>💖 Ураааа! Это будет самое милое свидание! 💖</h1>";
+
+// эффект при нажатии
+document.getElementById("yes").addEventListener("click",function(){
+document.body.innerHTML=
+'<div class="typewriter" id="finalText"></div>';
+
+let text="Anh biết mà ~ 😌\nEm đã chọn đúng rồi đó 💕\n\nHẹn gặp em sớm nhé.\n\nWith love,\nuncle D 💌";
+
+let i=0;
+let speed=50;
+
+function typeWriter(){
+if(i<text.length){
+document.getElementById("finalText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,speed);
+}
+}
+typeWriter();
+
+createHearts(60);
 });
+
+function createHearts(amount){
+for(let i=0;i<amount;i++){
+let heart=document.createElement("div");
+heart.innerHTML="💗";
+heart.classList.add("heart");
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+heart.style.fontSize=(Math.random()*25+15)+"px";
+document.body.appendChild(heart);
+}
+}
+
 </script>
 
 </body>

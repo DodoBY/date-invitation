@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Приглашение 💕</title>
+<style>
+body {
+    background: linear-gradient(135deg, #ff9ecf, #ffcce6);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    overflow: hidden;
+}
+
+h1 {
+    color: white;
+    font-size: 40px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+#yes {
+    background-color: #ff4da6;
+    color: white;
+}
+
+#no {
+    background-color: white;
+    color: #ff4da6;
+    position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Пойдешь со мной на свидание? 💕</h1>
+
+<button id="yes">Да, пойду 😍</button>
+<button id="no">Нет 🙈</button>
+
+<script>
+let noBtn = document.getElementById("no");
+let counter = 0;
+
+noBtn.addEventListener("mouseover", function() {
+    counter++;
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * window.innerHeight;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    if(counter > 5) {
+        noBtn.style.display = "none";
+    }
+});
+
+document.getElementById("yes").addEventListener("click", function() {
+    document.body.innerHTML = "<h1 style='color:white;'>💖 Ураааа! Это будет самое милое свидание! 💖</h1>";
+});
+</script>
+
+</body>
+</html>
